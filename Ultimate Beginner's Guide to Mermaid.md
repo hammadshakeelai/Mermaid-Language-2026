@@ -394,3 +394,199 @@ gitGraph
 
 ---
 
+
+
+## 🔗 Part 7: Interactive Flowcharts (Clickable Nodes)
+
+You can turn any node in a flowchart into a clickable hyperlink. This is incredibly useful for documentation, linking a high-level architecture diagram directly to specific GitHub repositories or Jira tickets.
+
+### Syntax
+
+* `click [NodeID] "[URL]" "[Hover Text]"`
+
+```mermaid
+flowchart LR
+    A[VSB Mobile App] --> B(API Gateway)
+    B --> C[(PostgreSQL Database)]
+
+    %% The lines below make the nodes clickable!
+    click A "https://github.com/yourusername/vsb-app" "Go to Frontend Repo"
+    click B "https://github.com/yourusername/vsb-api" "Go to Backend Repo"
+    
+    style A fill:#f9f,stroke:#333,stroke-width:2px
+
+```
+
+*(Note: Clicking works in the Mermaid Live Editor and most markdown previews, though exact behavior depends on your VS Code security settings).*
+
+---
+
+## 🧠 Part 8: Mindmaps
+
+Mindmaps are fantastic for brainstorming, breaking down complex topics, or mapping out the module structure of a large software application. They rely purely on **indentation** to determine the hierarchy.
+
+### Example: Structuring a Unified Engineering Environment
+
+```mermaid
+mindmap
+  root((Success Environment))
+    Code Editor
+      Syntax Highlighting
+      IntelliSense
+      Git Integration
+    Build Tools
+      Compiler
+      Linker
+      Custom OS Bootloader
+    Debugging
+      Memory Inspector
+      Call Stack Viewer
+    Collaboration
+      Live Share
+      Version Control
+
+```
+
+* Use `mindmap` to declare the graph type.
+* The `root` is the center circle.
+* Press `Tab` or `Space` to indent. Everything indented under a node becomes a branch of that node.
+* You can change node shapes just like flowcharts (e.g., `[Square]`, `(Rounded)`, `((Circle))`).
+
+---
+
+## 🎯 Part 9: Quadrant Charts
+
+Quadrant charts divide a 2D space into four areas. They are essential for competitive analysis, feature prioritization (Impact vs. Effort), or risk assessment.
+
+### Example: Competitive Analysis for a Scraping Tool
+
+```mermaid
+quadrantChart
+    title Market Positioning for Web Scrapers
+    x-axis Low Efficiency --> High Efficiency
+    y-axis Hard to Use --> Easy to Use
+    quadrant-1 Market Leaders
+    quadrant-2 Niche Tools
+    quadrant-3 Outdated Solutions
+    quadrant-4 Complex Enterprise
+    
+    Overwatch-CI: [0.8, 0.8]
+    Legacy Scraper A: [0.3, 0.2]
+    Script Kiddie Tool: [0.2, 0.7]
+    Heavy Enterprise Scraper: [0.9, 0.3]
+
+```
+
+* `x-axis` and `y-axis`: Define the scales.
+* `quadrant-1` to `quadrant-4`: Name the four boxes (Top-Right, Top-Left, Bottom-Left, Bottom-Right).
+* `[0.0 to 1.0, 0.0 to 1.0]`: Plot your specific data points on an X/Y scale. `[0.8, 0.8]` puts it high and to the right.
+
+---
+
+## 📋 Part 10: Requirement Diagrams
+
+Requirement diagrams are used heavily in Systems Engineering to map out exactly what a system *must* do and trace those requirements to specific components.
+
+### Syntax
+
+* `requirement`: Defines the rule.
+* `element`: Defines the physical/software part.
+* `- satisfies ->`: Links the element to the requirement it fulfills.
+
+### Example: B2B Lead Generation Tool
+
+```mermaid
+requirementDiagram
+
+    requirement DataScraping {
+        id: 1
+        text: The system must scrape company websites to identify outdated UI frameworks.
+        risk: medium
+        verifyMethod: test
+    }
+
+    requirement LeadExport {
+        id: 2
+        text: The system must export identified targets to a CSV format.
+        risk: low
+        verifyMethod: demonstration
+    }
+
+    element WebCrawlerElement {
+        type: Python Script
+    }
+
+    element CSVGeneratorElement {
+        type: Data Pipeline Component
+    }
+
+    WebCrawlerElement - satisfies -> DataScraping
+    CSVGeneratorElement - satisfies -> LeadExport
+
+```
+
+---
+
+## ⏳ Part 11: Timelines
+
+Timelines are perfect for showing a chronological sequence of events. You can use them for historical project milestones, product roadmaps, or even tracking the release order of your favorite media.
+
+### Example: Shonen Anime Progression
+
+```mermaid
+timeline
+    title Epic Shonen Journey
+    section The Classics
+        2002 : Naruto Premieres
+             : Introduces the Hidden Leaf
+        2007 : Naruto Shippuden
+             : The Akatsuki Arc Begins
+    section The Modern Era
+        2020 : Jujutsu Kaisen Season 1
+             : Domain Expansions Introduced
+        2023 : Jujutsu Kaisen Season 2
+             : The Shibuya Incident
+
+```
+
+* `timeline`: The starting keyword.
+* `section`: Groups events together (creates a larger colored block).
+* `[Time Period] : [Event 1] : [Event 2]`: Maps the data to the timeline.
+
+---
+
+## 🗺️ Part 12: User Journeys
+
+User Journeys map out the exact steps a person takes to achieve a goal within a system, rating their "experience" at each step.
+
+### Syntax
+
+* `journey`: Starts the graph.
+* `title`: Names the journey.
+* `section`: Groups tasks.
+* `[Task Name]: [Score 1-5]: [Actor]`
+
+### Example: App Backup Process
+
+```mermaid
+journey
+    title User Backing Up Phone Data
+    section Preparation
+      Open App: 5: User
+      Navigate to Backup Tab: 4: User
+    section Processing
+      Compressing Files: 3: System
+      Encrypting Payload: 2: System
+      Uploading to Cloud: 1: System
+    section Completion
+      Verify Checksum: 4: System
+      Receive Success Notification: 5: User
+
+```
+
+*(Notice the scores 1 through 5? A score of 5 renders with a happy face and high placement, while a 1 renders with a sad face, showing where users or systems might get frustrated or bogged down).*
+
+---
+
+This gives you a massive arsenal of diagraming capabilities right inside your code editor.
+
