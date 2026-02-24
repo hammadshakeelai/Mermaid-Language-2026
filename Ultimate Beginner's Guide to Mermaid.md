@@ -590,3 +590,171 @@ journey
 
 This gives you a massive arsenal of diagraming capabilities right inside your code editor.
 
+
+---
+
+## 🏗️ Part 13: C4 Architecture Diagrams
+
+The C4 model is an industry standard in Software Engineering for visualizing software architecture at different levels of zoom (Context, Containers, Components, and Code). Mermaid natively supports C4 diagrams.
+
+### Example: Virtual Smart Backup (VSB) System Context
+
+```mermaid
+C4Context
+    title System Context Diagram for Virtual Smart Backup (VSB)
+    
+    Person(user_hammad, "Mobile User", "A user of the VSB Android app.")
+    Person(admin_omar, "System Admin", "Monitors backup infrastructure.")
+    Person(dev_ayesha, "QA Engineer", "Tests backup integrity.")
+    
+    System(vsb_system, "Virtual Smart Backup", "Allows users to securely backup and restore mobile data.")
+    
+    System_Ext(cloud_storage, "AWS S3", "External cloud storage for encrypted payloads.")
+    System_Ext(auth_provider, "OAuth Provider", "Handles user authentication.")
+    
+    Rel(user_hammad, vsb_system, "Backups data using", "HTTPS")
+    Rel(admin_omar, vsb_system, "Monitors health of")
+    Rel(dev_ayesha, vsb_system, "Runs automated tests on")
+    
+    Rel(vsb_system, cloud_storage, "Stores encrypted archives in", "API")
+    Rel(vsb_system, auth_provider, "Authenticates users via", "OAuth2.0")
+
+```
+
+---
+
+## 🌊 Part 14: Sankey Diagrams
+
+Sankey diagrams are perfect for visualizing the flow of data, energy, or money. The width of the arrows is proportional to the flow quantity.
+
+### Example: Overwatch-CI Data Scraping Pipeline
+
+```mermaid
+sankey-beta
+    %% Syntax: Source, Target, Value
+    Scraped Websites, Raw HTML Pages, 5000
+    Raw HTML Pages, Outdated Frameworks Detected, 1200
+    Raw HTML Pages, Modern Frameworks, 3800
+    Outdated Frameworks Detected, Exported to CSV, 1150
+    Outdated Frameworks Detected, Failed to Parse, 50
+    Modern Frameworks, Discarded, 3800
+
+```
+
+---
+
+## 📊 Part 15: XY Charts (Bar and Line Graphs)
+
+You don't need Excel or Python just to plot simple data. Mermaid can generate clean Bar and Line charts directly in your Markdown.
+
+### Example: Sorting Algorithm Benchmarks (Analysis of Algorithms)
+
+```mermaid
+xychart-beta
+    title "Sorting Algorithm Execution Time (10k Elements)"
+    x-axis "Algorithms" [Bubble, Insertion, Selection, Merge, Quick]
+    y-axis "Time (ms)" 0 --> 150
+    bar [120, 95, 105, 15, 12]
+    line [120, 95, 105, 15, 12]
+
+```
+
+*(You can combine both `bar` and `line` in the same chart to emphasize the trend!)*
+
+---
+
+## 📦 Part 16: Packet Diagrams
+
+If you are working with low-level systems, custom operating systems, or network protocols, Packet Diagrams allow you to visualize the exact bit-level layout of a data frame or memory segment.
+
+### Example: Custom IPC Message Header Structure
+
+```mermaid
+packet-beta
+    title Inter-Process Communication (IPC) Header Layout
+    0-7: "Sender PID (8 bits)"
+    8-15: "Receiver PID (8 bits)"
+    16-23: "Message Type (8 bits)"
+    24-31: "Payload Length (8 bits)"
+    32-63: "Memory Address Pointer (32 bits)"
+
+```
+
+---
+
+## 🧩 Part 17: Block Diagrams
+
+Block diagrams are excellent for spatial mapping, such as laying out a UI wireframe, mapping out a custom PCB, or showing high-level system components grouped in a grid.
+
+### Example: Line-Following Robot Hardware Layout
+
+```mermaid
+block-beta
+    columns 3
+    
+    LeftSensor["Left IR Sensor"] space RightSensor["Right IR Sensor"]
+    
+    space Microcontroller["ESP32 / Arduino Brain"] space
+    
+    MotorDriver["L298N Motor Driver"]
+    
+    LeftMotor["Left DC Motor"] Battery["Li-Po Power Supply"] RightMotor["Right DC Motor"]
+    
+    %% Routing connections
+    LeftSensor --> Microcontroller
+    RightSensor --> Microcontroller
+    Microcontroller --> MotorDriver
+    Battery --> MotorDriver
+    Battery --> Microcontroller
+    MotorDriver --> LeftMotor
+    MotorDriver --> RightMotor
+
+```
+
+---
+
+## ⚙️ Part 18: Global Directives (Themes & Configs)
+
+You can change the entire look and feel of your Mermaid diagrams by passing a "Directive" at the very top of your diagram block. This is how you force a diagram into Dark Mode, change the font, or tweak the main colors.
+
+### Syntax
+
+You wrap the JSON configuration in `%%{` and `}%%`.
+
+```mermaid
+%%{init: { 
+  'theme': 'base', 
+  'themeVariables': { 
+    'primaryColor': '#ffaa00',
+    'primaryTextColor': '#fff',
+    'primaryBorderColor': '#7C0000',
+    'lineColor': '#F8B229',
+    'secondaryColor': '#006100',
+    'tertiaryColor': '#fff'
+  },
+  'fontFamily': 'Fira Code, monospace'
+}}%%
+
+flowchart LR
+    A[Start Game] --> B{Play Badminton?}
+    B -->|Yes| C[Win Match]
+    B -->|No| D[Study for Exams]
+
+```
+
+### Built-in Themes
+
+If you don't want to define custom hex codes, Mermaid has 5 built-in themes you can easily switch between:
+
+1. `default`
+2. `dark` (Perfect for VS Code)
+3. `neutral` (Great for printing to PDF)
+4. `forest` (Greens and earthy tones)
+5. `base` (The blank slate for your own variables, as used above)
+
+**Example of a quick Dark Mode toggle:**
+`%%{init: {'theme': 'dark'}}%%`
+
+---
+
+This officially covers the entire spectrum of what Mermaid is currently capable of rendering in VS Code! You now have a master document that ranges from basic flowcharts to complex software architecture and hardware schematics.
