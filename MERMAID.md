@@ -30,8 +30,11 @@ flowchart LR
     F -->|YES| Z{{Comes, Let Take Back Ye Eggs}}
 ```
 ```mermaid
-flowchart LR 
-    X[START] --> END
+flowchart TD
+    P --> LOOP
+    LOOP --> P
+    X[START] -->|INPUT| P[PROCESS]
+    P -->|OUTPUT| E[END]
 ```
 # Sequence Diagrams
 <!--  autonumber for numbering in steps -->
@@ -52,7 +55,26 @@ sequenceDiagram
     Server->>Client: Sends Resource
     deactivate Client
 ```
-
+```mermaid
+    sequenceDiagram
+        participant omar
+        participant me
+        participant bus
+        participant university
+        bus ->> me: reaches my stop
+        activate me
+        me ->> bus: gets on
+        deactivate me
+        activate bus
+        bus ->> omar: reaches omar stop
+        deactivate bus
+        activate omar
+        omar ->> bus: gsts on bus
+        deactivate omar
+        activate bus
+        bus ->> university: reached uni
+    
+```
 # Class Diagrams
 
 ```mermaid
